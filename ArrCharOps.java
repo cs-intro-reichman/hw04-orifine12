@@ -173,8 +173,35 @@ public class ArrCharOps {
      *         lexicographically greater than str2.
      *         return -2 if there is an error with the input.
      */
-    public static int compareTo(String str1, String str2) {
-        // Replace the following statement with your code
-        return 0;
+   public static int compareTo(String str1, String str2) {
+    // handle bad input (null or empty) → error code
+    if (str1 == null || str2 == null || str1.length() == 0 || str2.length() == 0) {
+        return -2;
     }
+
+    int minLen = Math.min(str1.length(), str2.length());
+
+    // compare character by character
+    for (int i = 0; i < minLen; i++) {
+        char c1 = str1.charAt(i);
+        char c2 = str2.charAt(i);
+
+        if (c1 < c2) {
+            return -1; // str1 is lexicographically smaller
+        } else if (c1 > c2) {
+            return 1;  // str1 is lexicographically bigger
+        }
+    }
+
+    // all common characters are equal → decide by length
+    if (str1.length() == str2.length()) {
+        return 0;          // same chars, same length
+    } else if (str1.length() < str2.length()) {
+        return -1;         // shorter = lexicographically smaller
+    } else {
+        return 1;          // longer = lexicographically bigger
+    }
+}
+
+
 }
